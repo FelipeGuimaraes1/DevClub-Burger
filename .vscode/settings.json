@@ -1,0 +1,11 @@
+{
+  "[javascriptreact]": {
+    "editor.codeActionsOnSave": {
+      "editor.defaultFormatter": "always",
+      "source.organizeImports": "always"
+    }
+  },
+  "editor.formatOnSave": true,
+  "cSpell.enableFiletypes": ["javascript"],
+  "cSpell.language": "en, pt, pt_BR"
+}

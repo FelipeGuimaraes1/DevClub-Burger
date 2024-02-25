@@ -1,18 +1,21 @@
 import { Router } from "express";
-import { v4 } from "uuid";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import multer from "multer";
+import multerConfig from "./config/multer";
 
-import User from "./app/models/User";
+import UserController from "./app/controllers/UserController";
+import SessionsController from "./app/controllers/SessionController";
+import ProductController from "./app/controllers/ProductController";
 
+const upload = multer(multerConfig);
 const routes = new Router();
 
-routes.get("/", async (req, res) => {
-  const user = await User.create({
-    id: v4(),
-    name: "Felipe",
-    email: "felipe@email.com",
-    password_hash: "123312"
-  });
-  return res.json(user);
-});
+routes.post("/users", UserController.store);
+
+routes.post("/sessions", SessionsController.store);
+
+routes.post("/products", upload.single("file"), ProductController.store);
+
+routes.get("/products", ProductController.index);
 
 export default routes;

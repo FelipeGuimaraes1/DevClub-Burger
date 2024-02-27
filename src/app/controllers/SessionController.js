@@ -1,9 +1,9 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from "yup";
 import User from "../models/User";
+import authConfig from "../../config/auth";
+import jwt from "jsonwebtoken";
 
 class SessionsController {
-  // eslint-disable-next-line class-methods-use-this
   async store(req, res) {
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
@@ -27,7 +27,15 @@ class SessionsController {
 
     if (!(await user.checkPassword(password))) userEmailOrPasswordIncorrect();
 
-    return res.json({ id: user.id, email, name: user.name, admin: user.admin });
+    return res.json({
+      id: user.id,
+      email,
+      name: user.name,
+      admin: user.admin,
+      token: jwt.sign({ id: user.id }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn
+      })
+    });
   }
 }
 

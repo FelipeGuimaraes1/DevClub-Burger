@@ -1,9 +1,7 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import * as Yup from "yup";
 import Product from "../models/Product";
 
 class ProductController {
-  // eslint-disable-next-line class-methods-use-this
   async store(req, res) {
     const schema = Yup.object().shape({
       name: Yup.string().required(),
@@ -30,7 +28,6 @@ class ProductController {
     return res.json(product);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   async index(req, res) {
     const products = await Product.findAll();
 

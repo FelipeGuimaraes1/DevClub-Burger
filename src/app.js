@@ -1,6 +1,6 @@
 import express from "express";
-import { resolve } from "path";
 import routes from "./routes";
+import { resolve } from "path";
 
 import "./database";
 
